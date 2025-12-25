@@ -202,4 +202,7 @@ extern class AppFS {
   **/
   @:luaDotMethod function listFiles( path: String ): LuaArray< String >;
 
+  @:luaDotMethod function makeDirectory( path: String ): Bool;
+  @:luaDotMethod function makeAllDirectories( path: String ): Bool;
+
 }

@@ -32,3 +32,7 @@ abstract FrameNumberInput( LuaIndex ) from LuaIndex to LuaIndex {
   @:from static inline function fromFrame( frame: Frame ): FrameNumberInput { return frame.frameNumber; }
 
 }
+
+// Haxe issue #7738: https://github.com/HaxeFoundation/haxe/issues/7738
+abstract VoidCallback (Void -> Void) from (Void -> Void) {}
+abstract GraphicsContextEventCallback ({context:GraphicsContext}-> Void) from ({context:GraphicsContext}-> Void) {}

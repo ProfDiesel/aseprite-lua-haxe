@@ -14,11 +14,13 @@ extern class App {
     Returns the active sprite, a [Sprite](https://github.com/aseprite/api/blob/master/api/sprite.md#sprite) object.
   **/
   var activeSprite: Sprite;
+  var sprite: Sprite;
   
   /**
     Returns the active layer, a [Layer](https://github.com/aseprite/api/blob/master/api/layer.md#layer) object.
   **/
   var activeLayer: Layer;
+  var layer: Layer;
   
   /**
     Gets or sets the active frame number (1 is the first frame in the sprite).
@@ -41,11 +43,13 @@ extern class App {
     ```
   **/
   var activeFrame: Frame;
+  var frame: Frame;
   
   /**
     Gets or sets the active [Cel](https://github.com/aseprite/api/blob/master/api/cel.md#cel) object.
   **/
   var activeCel: Cel;
+  var cel: Cel;
   
   /**
     ```lua
@@ -55,24 +59,28 @@ extern class App {
     Returns the active image, an [Image](https://github.com/aseprite/api/blob/master/api/image.md#image) object.
   **/
   var activeImage: Image;
+  var image: Image;
   
   /**
     Returns the active [tag](https://github.com/aseprite/api/blob/master/api/tag.md#tag), which is the tag located at the
     [active frame](https://github.com/aseprite/api/blob/master/api/app.md#appactiveframe).
   **/
   var activeTag( default, null ): Tag;
+  var tag( default, null ): Tag;
   
   /**
     Returns the active tool (a [Tool](https://github.com/aseprite/api/blob/master/api/tool.md#tool) object) selected in
     the [tool bar](https://www.aseprite.org/docs/workspace/).
   **/
   var activeTool: Tool;
+  var tool: Tool;
   
   /**
     Returns the active brush (a [Brush](https://github.com/aseprite/api/blob/master/api/brush.md#brush) object) selected
     in the [context bar](https://www.aseprite.org/docs/workspace/).
   **/
   var activeBrush: Brush;
+  var brush: Brush;
   
   /**
     ```lua
@@ -134,6 +142,8 @@ extern class App {
     Check the [app.fs](https://github.com/aseprite/api/blob/master/api/app_fs.md#appfs) documentation.
   **/
   var fs( default, null ): AppFS;
+
+  var params( default, null ): AppParams;
   
   /**
     This [pixelColor namespace](https://github.com/aseprite/api/blob/master/api/pixelcolor.md#apppixelcolor) contains internal functions

@@ -56,6 +56,8 @@ package aseprite;
     image is not associated to a cel.
   **/
   var cel( default, null ): Cel;
+
+  var context( default, null ): GraphicsContext;
   
   /**
     ```lua

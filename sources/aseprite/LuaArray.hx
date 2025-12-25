@@ -2,7 +2,7 @@ package aseprite;
 
 import lua.Table;
 
-import lua.PairTools;
+using lua.PairTools;
 
 
 @:forward abstract LuaArray< T >( Table< Int, T > ) from Table< Int, T > to Table< Int, T > {
@@ -17,7 +17,7 @@ import lua.PairTools;
 
     final array = new Array< T >();
 
-    PairTools.ipairsEach( this, function( index, element ) {
+    this.ipairsEach( function( index, element ) {
 
       array.push( element );
 
@@ -26,5 +26,4 @@ import lua.PairTools;
     return array;
 
   }
-
 }

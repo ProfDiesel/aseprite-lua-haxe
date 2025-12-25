@@ -1,11 +1,11 @@
 package aseprite;
 
-
-typedef DialogWidgetOptions = { ?id: String, ?label: String, ?focus: Boolean };
+typedef DialogWidgetOptions = { ?id: String, ?label: String, ?focus: Bool };
 
 typedef DialogTextWidgetOptions = DialogWidgetOptions & { ?text: String };
 
-typedef DialogButtonWidgetOptions = DialogTextWidgetOptions & { ?onclick: () -> Void, ?selected: Boolean };
+typedef DialogButtonWidgetOptions = DialogTextWidgetOptions & { ?onclick: VoidCallback, ?selected: Bool };
+
 
 /**
   The dialog class can be used to show input controls/widgets in the
@@ -120,7 +120,7 @@ typedef DialogButtonWidgetOptions = DialogTextWidgetOptions & { ?onclick: () -> 
     location. Useful to show the dialog in a previous position that you
     obtain from [Dialog.bounds](https://github.com/aseprite/api/blob/master/api/dialog.md#dialogbounds) property.
   **/
-  function show( ?options: { ?wait: Bool, ?bounds: RectangleInput } ): Void;
+  function show( ?options: { ?wait: Bool, ?bounds: RectangleInput } ): Dialog;
   
   /**
     ```lua
@@ -153,7 +153,7 @@ typedef DialogButtonWidgetOptions = DialogTextWidgetOptions & { ?onclick: () -> 
     Using the `newrow{ always }` is a way to avoid joining widgets of the
     same type (it's like calling `newrow()` after new widget is added).
   **/
-  function newrow( ?options: { ?always: Bool } ): Void;
+  function newrow( ?options: { ?always: Bool } ): Dialog;
   
   /**
     ```lua
@@ -163,7 +163,7 @@ typedef DialogButtonWidgetOptions = DialogTextWidgetOptions & { ?onclick: () -> 
                    text=string }
     ```
   **/
-  function separator( ?options: EitherType2< String, { ?text: String } > ): Void;
+  function separator( ?options: EitherType2< String, { ?text: String } > ): Dialog;
   
   /**
     ```lua
@@ -181,7 +181,7 @@ typedef DialogButtonWidgetOptions = DialogTextWidgetOptions & { ?onclick: () -> 
     
     Creates a static label.
   **/
-  function label( options: DialogTextWidgetOptions ): Void;
+  function label( options: DialogTextWidgetOptions ): Dialog;
   
   /**
     ```lua
@@ -206,7 +206,7 @@ typedef DialogButtonWidgetOptions = DialogTextWidgetOptions & { ?onclick: () -> 
     * `focus`: Focus this button by default or when the Enter key is pressed in an [text entry](https://github.com/aseprite/api/blob/master/api/dialog.md#dialogentry) field.
     * `onclick`: Function to be called when the button is pressed.
   **/
-  function button( options: DialogButtonWidgetOptions ): Void;
+  function button( options: DialogButtonWidgetOptions ): Dialog;
   
   /**
     ```lua
@@ -220,7 +220,7 @@ typedef DialogButtonWidgetOptions = DialogTextWidgetOptions & { ?onclick: () -> 
     
     Creates a check box. Arguments are the same as in [Dialog:button](https://github.com/aseprite/api/blob/master/api/dialog.md#dialogbutton).
   **/
-  function check( options: DialogButtonWidgetOptions ): Void;
+  function check( options: DialogButtonWidgetOptions ): Dialog;
   
   /**
     ```lua
@@ -234,7 +234,7 @@ typedef DialogButtonWidgetOptions = DialogTextWidgetOptions & { ?onclick: () -> 
     
     Creates a radio button. Arguments are the same as in [Dialog:button](https://github.com/aseprite/api/blob/master/api/dialog.md#dialogbutton).
   **/
-  function radio( options: DialogButtonWidgetOptions ): Void;
+  function radio( options: DialogButtonWidgetOptions ): Dialog;
   
   /**
     ```lua
@@ -247,7 +247,7 @@ typedef DialogButtonWidgetOptions = DialogTextWidgetOptions & { ?onclick: () -> 
     
     Creates a text entry.
   **/
-  function entry( options: DialogTextWidgetOptions ): Void;
+  function entry( options: DialogTextWidgetOptions ): Dialog;
   
   /**
     ```lua
@@ -260,7 +260,7 @@ typedef DialogButtonWidgetOptions = DialogTextWidgetOptions & { ?onclick: () -> 
     
     Creates an entry field to input a number.
   **/
-  function number( options: DialogTextWidgetOptions & { ?decimals: Int } ): Void;
+  function number( options: DialogTextWidgetOptions & { ?decimals: Int } ): Dialog;
   
   /**
     ```lua
@@ -274,7 +274,7 @@ typedef DialogButtonWidgetOptions = DialogTextWidgetOptions & { ?onclick: () -> 
     
     Creates a slider in the dialog.
   **/
-  function slider( options: DialogWidgetOptions & { ?min: Int, ?max: Int, ?value: Int } ): Void;
+  function slider( options: DialogWidgetOptions & { ?min: Int, ?max: Int, ?value: Int, ?onchange: VoidCallback } ): Dialog;
   
   /**
     ```lua
@@ -287,7 +287,8 @@ typedef DialogButtonWidgetOptions = DialogTextWidgetOptions & { ?onclick: () -> 
     
     Creates a combo box/drop-down list.
   **/
-  function combobox( options: DialogWidgetOptions & { options: LuaArray< String >, ?option: String } ): Void;
+  
+  function combobox( options: DialogWidgetOptions & { options: LuaArray< String >, ?option: String, ?onchange: VoidCallback } ): Dialog;
   
   /**
     ```lua
@@ -299,7 +300,7 @@ typedef DialogButtonWidgetOptions = DialogTextWidgetOptions & { ?onclick: () -> 
     
     Creates a button to select a [color](https://github.com/aseprite/api/blob/master/api/color.md#color).
   **/
-  function color( options: DialogWidgetOptions & { ?color: Color, ?onchange: ( { ?color: Color } ) -> Void } ): Void;
+  function color( options: DialogWidgetOptions & { ?color: Color, ?onchange: ( { ?color: Color } ) -> Void } ): Dialog;
   
   /**
     ```lua
@@ -336,7 +337,7 @@ typedef DialogButtonWidgetOptions = DialogTextWidgetOptions & { ?onclick: () -> 
     }
     ```
   **/
-  function shades( options: DialogWidgetOptions & { colors: LuaArray< Color >, ?mode: String, ?onclick: ( { button: MouseButton, ?color: Color } ) -> Void } ): Void;
+  function shades( options: DialogWidgetOptions & { colors: LuaArray< Color >, ?mode: String, ?onclick: ( { button: MouseButton, ?color: Color } ) -> Void } ): Dialog;
   
   /**
     ```lua
@@ -366,7 +367,7 @@ typedef DialogButtonWidgetOptions = DialogTextWidgetOptions & { ?onclick: () -> 
     * `focus`: Focus this field by default.
     * `onchange`: Function to be called when the filename is changed.
   **/
-  function file( options: DialogWidgetOptions & { ?filename: String, ?save: Bool, ?title: String, ?entry: Bool, ?filetypes: LuaArray< String >, ?onchange: () -> Void } ): Void;
+  function file( options: DialogWidgetOptions & { ?filename: String, ?save: Bool, ?title: String, ?entry: Bool, ?filetypes: LuaArray< String >, ?onchange: VoidCallback } ): Dialog;
   
   /**
     ```lua
@@ -379,6 +380,27 @@ typedef DialogButtonWidgetOptions = DialogTextWidgetOptions & { ?onclick: () -> 
     
     Changes properties of the given widget that matches the identifier `id`.
   **/
-  function modify( options: { ?id: String, ?enabled: Bool, ?selected: Bool, ?visible: Bool, ?text: String, ?label: String, ?focus: Bool } ): Void;
+  function modify( options: { ?id: String, ?enabled: Bool, ?selected: Bool, ?visible: Bool, ?text: String, ?label: String, ?focus: Bool } ): Dialog;
 
+
+  function canvas( options: {
+            ?id:String,
+            ?width:Int,
+            ?height:Int,
+            ?autoscaling:Bool,
+            ?onpaint:GraphicsContextEventCallback,
+            // ?onkeydown:(ev: KeyEvent) -> Void,
+            // ?onkeyup:(ev: KeyEvent) -> Void,
+            // ?onmousemove:(ev: MouseEvent) -> Void,
+            // ?onmousedown:(ev: MouseEvent) -> Void,
+            // ?onmouseup:(ev: MouseEvent) -> Void,
+            // ?ondblclick:(ev: MouseEvent) -> Void,
+            // ?onwheel:(ev: MouseEvent) -> Void,
+            // ?ontouchmagnify:(ev: TouchEvent) -> Void
+            }): Dialog;
+
+  function repaint(): Void;
+
+  function tab( options: { ?id: String, ?text: String, ?onclick: VoidCallback } ): Dialog;
+  function endtabs( ?options: { ?id: String, ?align: Int, ?selected: String, ?onchange: VoidCallback } ): Dialog;
 }
